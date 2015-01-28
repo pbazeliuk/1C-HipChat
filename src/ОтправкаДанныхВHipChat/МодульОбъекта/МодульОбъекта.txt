@@ -1,0 +1,76 @@
+﻿
+&НаКлиенте
+Процедура CreateRoom(Команда)
+	CreateRoomНаСервере();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура Notification(Команда)
+	NotificationНаСервере();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура NotificationText(Команда)
+	NotificationTextНаСервере();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура ShareLink(Команда)
+	ShareLinkНаСервере();
+КонецПроцедуры
+
+
+
+&НаСервере
+Процедура CreateRoomНаСервере()
+	
+	СтруктураCreateRoom = git_HipChat.ПолучитьПустуюСтруктуруCreateRoom();
+	СтруктураCreateRoom.name.data = "1C";
+	                                                    
+	git_HipChat.ОтправитьДанныеJSON("api.hipchat.com", "****************************************", СтруктураCreateRoom);
+
+КонецПроцедуры // CreateRoomНаСервере()
+
+&НаСервере
+Процедура NotificationНаСервере()
+	
+	СтруктураNotification = git_HipChat.ПолучитьПустуюСтруктуруNotification();
+	СтруктураNotification.path_params.data = "1C";
+	
+	СтруктураNotification.color.data = "green";
+	СтруктураNotification.message.data = "data-text-json";
+	СтруктураNotification.notify.data = "false";
+	СтруктураNotification.message_format.data = "text";
+	
+	git_HipChat.ОтправитьДанныеJSON("api.hipchat.com", "****************************************", СтруктураNotification);
+	
+КонецПроцедуры // NotificationНаСервере()
+
+&НаСервере
+Процедура NotificationTextНаСервере()
+	
+	СтруктураNotification = git_HipChat.ПолучитьПустуюСтруктуруNotification();
+	СтруктураNotification.path_params.data = "1C";
+	СтруктураNotification.message.data = "data-text-plain";
+	
+	git_HipChat.ОтправитьДанныеText("api.hipchat.com", "****************************************", СтруктураNotification);
+	
+КонецПроцедуры // NotificationTextНаСервере()
+
+&НаСервере
+Процедура ShareLinkНаСервере()
+
+	СтруктураShareLink = git_HipChat.ПолучитьПустуюСтруктуруShareLink();
+	СтруктураShareLink.path_params.data = "1C";
+	СтруктураShareLink.message.data = "share-link-message";
+	СтруктураShareLink.link.data = "http://avtomat.biz";
+	
+	git_HipChat.ОтправитьДанныеJSON("api.hipchat.com", "****************************************", СтруктураShareLink);
+
+КонецПроцедуры // ShareLinkНаСервере()
+
+
+ 
+
+
+
